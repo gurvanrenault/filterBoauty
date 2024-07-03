@@ -1,0 +1,10 @@
+{% include "includes/header.html"%}
+<div>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" />
+    </form>
+
+</div>
+{% include "includes/footer.html"%}
