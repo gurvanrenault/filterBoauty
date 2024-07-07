@@ -29,9 +29,11 @@ jobs:
     - name: Install Dependencies
       run: |
         conda env create -f environment.yml
-        conda init
-        conda activate filterBoa 
+      
+        
     - name: Run Tests
       run: |
+        conda init bash
+        conda activate filterBoa 
         cd src 
         python manage.py test
