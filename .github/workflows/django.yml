@@ -15,14 +15,13 @@ jobs:
     - uses: actions/checkout@v4
     
     - name: Install Conda environment with Micromamba
-        uses: mamba-org/provision-with-micromamba@main
-        with:
-          cache-downloads: true
-          channels: "conda-forge,defaults"
-          environment-file: false
-          environment-name: conda-env-builder-test
-          extra-specs: "conda-lock=1.4.0"
-
+      uses:  mamba-org/provision-with-micromamba@main
+      with:
+        cache-downloads: true
+        channels: "conda-forge,defaults"
+        environment-file: false
+        environment-name: conda-env-builder-test
+    
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
