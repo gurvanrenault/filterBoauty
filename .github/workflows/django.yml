@@ -19,21 +19,24 @@ jobs:
       with:
         cache-downloads: true
         channels: "conda-forge,defaults"
-        environment-file: false
-        environment-name: conda-env-builder-test
+        environment-file: environment.yml
+        environment-name: filterBoa
     
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Install Dependencies
-      run: |
-        conda env create -f environment.yml
-      
-        
+    - name: Conda info
+      shell: bash -el {0}
+      run: conda info
+    - name: Conda list
+      shell: pwsh
+      run: conda list
+    - name: Environment
+      shell: bash -el {0}
+      run: printenv | sort    
     - name: Run Tests
+      shell: bash -el {0}
       run: |
-        conda init bash
-        conda activate filterBoa 
         cd src 
         python manage.py test
