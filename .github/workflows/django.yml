@@ -29,6 +29,7 @@ jobs:
     - name: Install Dependencies
       run: |
         conda env create -f environment.yml
+        conda init
         conda activate filterBoa 
     - name: Run Tests
       run: |
