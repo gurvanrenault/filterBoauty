@@ -25,6 +25,9 @@ def index (request):
     context  = { "form" : form}
     return render(request, "index.html", context)
 
+"""
+    Route to select filters
+"""
 def filters(request,filename):
     
     form = SelectFilterFormular()
@@ -35,6 +38,9 @@ def filters(request,filename):
             } 
     return render(request, "filters.html", context)
 
+"""
+    Route to download an image
+"""
 def download(request):
     if request.method == 'POST':
             print("ARARR")
@@ -45,7 +51,7 @@ def download(request):
                 filterHandler = Filters()
                 imagehandler = ImageHandler()
                 img = ImageHandler.getUploadedImage(filename)
-                imgFiltered= filterHandler.applyfilter(filtername,img)
+                imgFiltered= filterHandler.applyFilter(filtername,img)
                 imagehandler.uploadImage(imgFiltered,filename)
                 return imagehandler.download(filename)
 

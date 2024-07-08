@@ -8,6 +8,7 @@ from filterBoauty.settings import MEDIA_ROOT
 from PIL import Image 
 from filterBoauty.models.Filters import Filters 
 
+# This class handle the upload/download , the application of filters, convert to base64 
 class ImageHandler():
     
     
@@ -25,31 +26,43 @@ class ImageHandler():
         ts = time.time()
         name = f.name
         filename = str(int(ts))+"."+name.split('.')[1]
-        print("Création du fichier "+filename+" ...")
         with open(str(MEDIA_ROOT)+"/"+filename, 'wb+') as destination:
            for chunk in f.chunks():
                 destination.write(chunk)
         return filename
     
-    def uploadImage(self,img:Image,filename)-> None: 
+     
+    """
+        Upload an image 
+        @param filename : name of the file 
+        @param img : image to upload 
+     """
+    def uploadImage(self,img:Image,filename:str)-> None: 
         img.save(os.path.join(str(MEDIA_ROOT),filename))
 
+
+    """
+        Download a file client-side
+        @param filename : name of the file 
+        @return HttpResponse the reponse to the query containing the file to download  
+    """
     def download(self,filename:str)-> HttpResponse:
         file = open(str(MEDIA_ROOT)+"/"+filename, "rb").read()
         response = HttpResponse(file, content_type='image/'+filename.split('.')[1])
         response['Content-Disposition'] = 'attachment; filename={}'.format(filename.split('.')[0]+'-edited.'+filename.split('.')[1])
         return response
     
-    def imageToBase64(img :Image):
+
+    """
+        Convert an image to base 64
+        @param img image to convert
+    """
+    def imageToBase64(img :Image) -> str:
         output = io.BytesIO()
         img.save(output, format="png")
         return  base64.b64encode(output.getvalue())
     
-    
-    
-    def base64ToImage(b64: str)->Image:
-        return Image.open(b64)
-    
+
     def getUploadedImage(filename)->Image:
         return Image.open(os.path.join(MEDIA_ROOT,filename))
    
@@ -65,7 +78,7 @@ class ImageHandler():
         for filtername in ImageHandler.FILTERS:
             id+=1
             img = ImageHandler.getUploadedImage(filename)
-            imgFiltered= filterHandler.applyfilter(filtername,img)
+            imgFiltered= filterHandler.applyFilter(filtername,img)
             base64 = "data:image/"+filename.split('.')[1]+";base64,"+str(ImageHandler.imageToBase64(imgFiltered), encoding='utf-8')
             filters.append({ "id":id,"name" : filtername.title(),"base64": base64}) 
         return filters
