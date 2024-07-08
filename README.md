@@ -3,7 +3,7 @@
 
  ### Requirements
 - Conda
-- Python >3.10 or higher
+- Python 3.10 or higher
 
 ## Create Environnement
 
