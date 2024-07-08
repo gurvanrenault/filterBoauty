@@ -2,8 +2,8 @@
 
 
  ### Requirements
-Conda
- Python >3.10 or higher
+- Conda
+   Python >3.10 or higher
 
 ## Create Environnement
 
@@ -17,4 +17,5 @@ To initialize the conda environment :
 ## Run application 
 
 `` python  ./src/manage.py runserver ``
+
 ![Selection of filters](https://i.ibb.co/1L2nKBy/Capture-d-cran-du-2024-07-08-12-11-55.png)
