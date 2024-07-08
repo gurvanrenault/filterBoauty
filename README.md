@@ -7,7 +7,7 @@
 
 ## Create Environnement
 
-The project is based on  conda environment. You will need to in
+The project is based on a conda environment. You will need to initialize it.
 
 To initialize the conda environment : 
 `` conda env create -f environment. yml``
