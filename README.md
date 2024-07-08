@@ -10,7 +10,7 @@
 The project is based on a conda environment. You will need to initialize it.
 
  - To initialize the conda environment : 
-`` conda env create -f environment. yml``
+`` conda env create -f environment.yml``
 -  To activate the conda environment :
  ``conda activate filterBoa
 ``
