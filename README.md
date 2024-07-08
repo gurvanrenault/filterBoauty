@@ -26,7 +26,7 @@ The project is based on a conda environment. You will need to initialize it.
  ``conda activate filterBoa
 ``
 ### Run application 
-
-`` python  ./src/manage.py runserver ``
+- `` cd src``
+-`` python  ./src/manage.py runserver ``
 
 ![Selection of filters](https://i.ibb.co/1L2nKBy/Capture-d-cran-du-2024-07-08-12-11-55.png)
