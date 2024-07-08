@@ -1,11 +1,22 @@
 # FilterBoauty 
+This projects is a simple Django application to apply filters for your pictures.
+You just need to upload your photos in the web app and apply custom filters
 
+
+### Filters availanble 
+  - ANTARTICA
+  - FAR WEST
+  - INDIE
+  - RANDOM : generate a random filter (useful in debugging to create filters)
+
+
+## Installation 
 
  ### Requirements
 - Conda
 - Python 3.10 or higher
 
-## Create Environnement
+ ### Create Environnement
 
 The project is based on a conda environment. You will need to initialize it.
 
@@ -14,7 +25,7 @@ The project is based on a conda environment. You will need to initialize it.
 -  To activate the conda environment :
  ``conda activate filterBoa
 ``
-## Run application 
+### Run application 
 
 `` python  ./src/manage.py runserver ``
 
