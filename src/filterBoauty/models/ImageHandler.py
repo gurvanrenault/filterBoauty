@@ -12,7 +12,7 @@ class ImageHandler():
     
     
     AUTHORIZED_MIME  = ["png","jpg","jpeg"]
-    FILTERS = ["sepia","indie"]
+    FILTERS = ["sepia","indie","farwest","antartica"]
         
     
     """
