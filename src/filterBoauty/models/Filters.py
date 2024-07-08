@@ -3,8 +3,8 @@ import numpy as np
 import random 
 
 # This class handle the filters applied to images 
-
 class Filters: 
+
 
     """
         Filter sépia
@@ -35,7 +35,6 @@ class Filters:
 
                 pixels[px, py] = (tr,tg,tb)
         return img
-
     """
         Filter INDIE
         @param img : image to modify 
@@ -58,6 +57,7 @@ class Filters:
         img = img.convert("RGB", matrix)
         return img
     
+   
     """
         Filter FAR WEST
         @param img : image to modify 

@@ -27,6 +27,6 @@ The project is based on a conda environment. You will need to initialize it.
 ``
 ### Run application 
 - `` cd src``
--`` python  ./src/manage.py runserver ``
+- `` python manage.py runserver ``
 
 ![Selection of filters](https://i.ibb.co/1L2nKBy/Capture-d-cran-du-2024-07-08-12-11-55.png)

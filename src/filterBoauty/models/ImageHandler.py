@@ -63,21 +63,32 @@ class ImageHandler():
         return  base64.b64encode(output.getvalue())
     
 
-    def getUploadedImage(filename)->Image:
+    """
+        Get uploaded image 
+        @param filename : name of the file 
+        @param img image to open
+
+    """
+    def get_uploaded_image(filename)->Image:
         return Image.open(os.path.join(MEDIA_ROOT,filename))
    
+    """
+        Get uploaded image 
+        @param filename : name of the file 
+        @return list of base64 encoded images corresponding to filters
+    """
     def get_filters_images(filename:str):
         filters= []
         filterHandler = Filters()
         id = 0 
 
-        img = ImageHandler.getUploadedImage(filename)
+        img = ImageHandler.get_uploaded_image(filename)
         base64 = "data:image/"+filename.split('.')[1]+";base64,"+str(ImageHandler.image_to_base64(img), encoding='utf-8')
         filters.append({  "id":id,"name" : "Original","base64": base64})
         
         for filtername in ImageHandler.FILTERS:
             id+=1
-            img = ImageHandler.getUploadedImage(filename)
+            img = ImageHandler.get_uploaded_image(filename)
             imgFiltered= filterHandler.apply_filter(filtername,img)
             base64 = "data:image/"+filename.split('.')[1]+";base64,"+str(ImageHandler.image_to_base64(imgFiltered), encoding='utf-8')
             filters.append({ "id":id,"name" : filtername.title(),"base64": base64}) 

@@ -28,6 +28,9 @@ def index (request):
 """
     Route to select filters
 """
+"""
+    Route to select filters
+"""
 def filters(request,filename):
     
     form = SelectFilterFormular()
