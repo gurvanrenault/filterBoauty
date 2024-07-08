@@ -21,7 +21,7 @@ class ImageHandler():
         param : 
             f : InMemoryUploadedFile  the image file 
      """
-    def uploadFile(self,f)-> None: 
+    def upload_file(self,f)-> None: 
         print(type(f).__name__)
         ts = time.time()
         name = f.name
@@ -37,7 +37,7 @@ class ImageHandler():
         @param filename : name of the file 
         @param img : image to upload 
      """
-    def uploadImage(self,img:Image,filename:str)-> None: 
+    def upload_image(self,img:Image,filename:str)-> None: 
         img.save(os.path.join(str(MEDIA_ROOT),filename))
 
 
@@ -57,7 +57,7 @@ class ImageHandler():
         Convert an image to base 64
         @param img image to convert
     """
-    def imageToBase64(img :Image) -> str:
+    def image_to_base64(img :Image) -> str:
         output = io.BytesIO()
         img.save(output, format="png")
         return  base64.b64encode(output.getvalue())
@@ -66,19 +66,19 @@ class ImageHandler():
     def getUploadedImage(filename)->Image:
         return Image.open(os.path.join(MEDIA_ROOT,filename))
    
-    def getNativeFiltersBase64(filename:str):
+    def get_filters_images(filename:str):
         filters= []
         filterHandler = Filters()
         id = 0 
 
         img = ImageHandler.getUploadedImage(filename)
-        base64 = "data:image/"+filename.split('.')[1]+";base64,"+str(ImageHandler.imageToBase64(img), encoding='utf-8')
+        base64 = "data:image/"+filename.split('.')[1]+";base64,"+str(ImageHandler.image_to_base64(img), encoding='utf-8')
         filters.append({  "id":id,"name" : "Original","base64": base64})
         
         for filtername in ImageHandler.FILTERS:
             id+=1
             img = ImageHandler.getUploadedImage(filename)
-            imgFiltered= filterHandler.applyFilter(filtername,img)
-            base64 = "data:image/"+filename.split('.')[1]+";base64,"+str(ImageHandler.imageToBase64(imgFiltered), encoding='utf-8')
+            imgFiltered= filterHandler.apply_filter(filtername,img)
+            base64 = "data:image/"+filename.split('.')[1]+";base64,"+str(ImageHandler.image_to_base64(imgFiltered), encoding='utf-8')
             filters.append({ "id":id,"name" : filtername.title(),"base64": base64}) 
         return filters

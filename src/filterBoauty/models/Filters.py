@@ -34,7 +34,6 @@ class Filters:
                     tb = 255
 
                 pixels[px, py] = (tr,tg,tb)
-
         return img
 
     """
@@ -43,8 +42,8 @@ class Filters:
         @return image modified 
     """
     def indie(img: Image)->Image:
-        img= Filters.addNoise(img,0.02)
-        img= Filters.enhanceSaturation(img,2.47)
+        img= Filters.add_noise(img,0.02)
+        img= Filters.enhance_saturation(img,2.47)
         return img 
     
     """
@@ -68,8 +67,8 @@ class Filters:
         matrix = (0.7868854105884159, 0.14494583677528716, 0.44905046302954854, 0.2596145929943917,
                   0.32501857212215146, 0.7965111006084229, 0.6275831795667688, 0.6341024781143401,
                   0.3478819863064878, 0.25459073828476997, 0.9248951628790252, 0.049728751307545394)
-        img= Filters.enhanceSaturation(img,2.47)
-        img= Filters.addNoise(img,0.05)
+        img= Filters.enhance_saturation(img,2.47)
+        img= Filters.add_noise(img,0.05)
         img = img.convert("RGB", matrix)
         return img
     
@@ -94,7 +93,7 @@ class Filters:
         @param factor : factor of enhancement
         @return image modified 
     """
-    def enhanceSaturation(image, factor=1)->Image:
+    def enhance_saturation(image, factor=1)->Image:
 
         converter = ImageEnhance.Color(image)
         return converter.enhance(factor)
@@ -105,7 +104,7 @@ class Filters:
         @param factor : factor of enhancement
         @return image modified 
     """
-    def addNoise(image, amount=0.02):
+    def add_noise(image, amount=0.02):
         np_image = np.array(image)
         noise = np.random.normal(0, amount * 255, np_image.shape)
         np_image = np.clip(np_image + noise, 0, 255).astype(np.uint8)
@@ -117,6 +116,6 @@ class Filters:
         @param filtername : name of the filter
         @return image modified 
     """
-    def applyFilter(self,filtername,img):
+    def apply_filter(self,filtername,img):
         filter = getattr(Filters,filtername)
         return filter(img)
