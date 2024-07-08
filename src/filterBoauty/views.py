@@ -18,7 +18,7 @@ def index (request):
         print(request.FILES)
         if form.is_valid():
             uploader = ImageHandler()
-            filename = uploader.uploadFile(request.FILES['file'])
+            filename = uploader.upload_file(request.FILES['file'])
             return HttpResponseRedirect('/filters/'+filename)
         print(form.errors) 
     form = UploadFormular()
@@ -28,12 +28,15 @@ def index (request):
 """
     Route to select filters
 """
+"""
+    Route to select filters
+"""
 def filters(request,filename):
     
     form = SelectFilterFormular()
     context= {
               "filename": filename, 
-              "filters" : ImageHandler.getNativeFiltersBase64(filename),
+              "filters" : ImageHandler.get_filters_images(filename),
               "form":form
             } 
     return render(request, "filters.html", context)
@@ -43,16 +46,15 @@ def filters(request,filename):
 """
 def download(request):
     if request.method == 'POST':
-            print("ARARR")
             form = SelectFilterFormular(request.POST)
             if form.is_valid():
                 filename = request.POST['filename']
                 filtername = request.POST['filter'].lower()
                 filterHandler = Filters()
                 imagehandler = ImageHandler()
-                img = ImageHandler.getUploadedImage(filename)
-                imgFiltered= filterHandler.applyFilter(filtername,img)
-                imagehandler.uploadImage(imgFiltered,filename)
+                img = ImageHandler.get_uploaded_image(filename)
+                imgFiltered= filterHandler.apply_filter(filtername,img)
+                imagehandler.upload_image(imgFiltered,filename)
                 return imagehandler.download(filename)
 
     return HttpResponseRedirect('/')
